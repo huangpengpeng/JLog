@@ -151,11 +151,12 @@ public class LogActivity extends BaseActivity {
                     break;
                 case 2:
                     mTextView.setText(msg.getData().get("msg").toString());
-                    int offset = mTextView.getMeasuredHeight() - mRootView.getHeight();
-                    if (offset < 0) {
-                        offset = 0;
-                    }
-                    mRootView.scrollTo(0, offset);
+                    new Handler().post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mRootView.fullScroll(ScrollView.FOCUS_DOWN);
+                        }
+                    });
                     break;
                 case 4:
                     setTitle("JLog");
